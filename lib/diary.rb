@@ -20,11 +20,10 @@ class Diary
   end 
     
   def extract_numbers
-        @phone_numbers = []
-		@phone_numbers << @entries.map do |x|
+		@phone_numbers =  @entries.map do |x|
 			x.read.scan(/07[0-9]{9}/)
 		end 
-		@phone_numbers
+        @phone_numbers.join
   end
 
   def past_diary_and_to_do(day)

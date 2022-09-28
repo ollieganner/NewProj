@@ -1,12 +1,11 @@
 require 'diary'
 require 'log'
 require 'to_do_list'
-require 'number_scraper'
 
 RSpec.describe Diary do
 	it "add entry" do
 		diary = Diary.new
-		entry = Log.new('Dear Diary, I ate a pineapple.')
+		entry = Log.new('Dear Diary, I ate a pineapple.','01/01/2021')
 		diary.add(entry)
 	end 
 	it "read past day" do
@@ -17,21 +16,15 @@ RSpec.describe Diary do
 		diary.add(entry)
 		diary.add(entry_2)
 		diary.add(entry_3)
-		result = diary.read('02/01/2021')
-		expect(result).to eq(entry_2)
+		result = diary.read_past('02/01/2021')
+		expect(result).to eq('Dear Diary, I ate a apple.')
 	end 
-	it "read invalid day" do
+	
+	it "read incorrect day " do
 		diary = Diary.new
 		entry = Log.new('Dear Diary, I ate a pineapple.','01/01/2021')
 		diary.add(entry)
-		expect{diary.read('01/09/2022')}.to raise_error("No such day.")
-	end 
-
-	it "get " do
-		diary = Diary.new
-		entry = Log.new('Dear Diary, I ate a pineapple.','01/01/2021')
-		diary.add(entry)
-		expect{diary.read('01/09/2022')}.to raise_error("No such day.")
+		expect{diary.read_past('01/09/2022')}.to raise_error("No such diary entry.")
 	end 
 
 	it "select correct day" do
@@ -73,14 +66,13 @@ RSpec.describe Diary do
 		entry = Log.new('Dear Diary, I ate a pineapple and it was very pleasant to eat.','01/01/2021')
 		diary.add(entry)
 		diary.add_list(list)
-		result = diary.past_diary_and_to_do('02/01/2021')
-		expect(result).to eq(1)
+		expect{diary.past_diary_and_to_do('02/01/2021')}.to raise_error("No such diary entry.")
 	end 
 	it "get numbers" do
 		diary = Diary.new
 		entry = Log.new('Dear Diary, called jane on 07859406769','01/01/2021')
 		diary.add(entry)
 		results = diary.extract_numbers
-		expect(result).to eq('07859406769')
+		expect(results).to eq('07859406769')
 	end 
 end 
