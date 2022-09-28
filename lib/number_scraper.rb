@@ -1,27 +1,18 @@
-class Todo
-  def initialize(entry, date) 
-    @entry = entry
-    @date = date
-  end
+require_relative 'log'
+require_relative 'to_do'
+require_relative 'to_do_list'
+require_relative 'diary'
 
-  def read
-    @entry
-  end 
+class NumberExtractor
+	def initialize(diary)
+		@diary = diary 
+	end 
+	def extract_numbers
+		numbers = []
 
-  def date
-    @date
-  end 
-
-  def mark_done
-    @done = 1
-  end 
-
-  def done 
-    if @done == 1
-        return true
-    else 
-        return false
-    end
-  end
+		return @diary.entries.map do |x|
+			x.read.scan(/07[0-9]{9}/)
+		end 
+		
+	end
 end
-

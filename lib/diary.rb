@@ -1,5 +1,6 @@
 require_relative 'log'
 require_relative 'to_do'
+require_relative 'number_scraper'
 require_relative 'to_do_list'
 
 class Diary
@@ -7,12 +8,18 @@ class Diary
     @entries = []
   end 
 
+  def entries 
+    @entries
+  end
+
   def add(entry) 
     @entries << entry
   end
+
   def add_list(list)   
     @list = list 
   end 
+
 
   def get_to_do(day)
     @list.entries.each do |x| 
@@ -52,3 +59,9 @@ end
     end
 end
 
+diary = Diary.new
+		entry = Log.new('Dear Diary, called jane on 07859406769','01/01/2021')
+		diary.add(entry)
+		numbers = NumberExtractor.new(diary)
+		results = numbers.extract_numbers
+		puts results

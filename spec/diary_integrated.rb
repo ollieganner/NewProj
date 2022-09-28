@@ -1,6 +1,7 @@
 require 'diary'
 require 'log'
 require 'to_do_list'
+require 'number_scraper'
 
 RSpec.describe 'integrated' do
 	it "add entry" do
@@ -74,5 +75,13 @@ RSpec.describe 'integrated' do
 		diary.add_list(list)
 		result = diary.past_diary_and_to_do('02/01/2021')
 		expect(result).to eq(1)
+	end 
+	it "get numbers" do
+		diary = Diary.new
+		entry = Log.new('Dear Diary, called jane on 07859406769','01/01/2021')
+		diary.add(entry)
+		numbers = NumberGetter.new(diary)
+		results = numbers.extract_numbers
+		expect(result).to eq('07859406769')
 	end 
 end 
