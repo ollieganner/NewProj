@@ -80,7 +80,7 @@ RSpec.describe 'integrated' do
 		diary = Diary.new
 		entry = Log.new('Dear Diary, called jane on 07859406769','01/01/2021')
 		diary.add(entry)
-		numbers = NumberGetter.new(diary)
+		numbers = NumberExtractor.new(diary)
 		results = numbers.extract_numbers
 		expect(result).to eq('07859406769')
 	end 

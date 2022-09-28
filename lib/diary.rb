@@ -1,6 +1,6 @@
 require_relative 'log'
 require_relative 'to_do'
-require_relative 'number_scraper'
+require_relative 'phone_book'
 require_relative 'to_do_list'
 
 class Diary
@@ -19,8 +19,7 @@ class Diary
   def add_list(list)   
     @list = list 
   end 
-
-
+    
   def get_to_do(day)
     @list.entries.each do |x| 
         if x.date == day    
@@ -45,6 +44,7 @@ end
     end 
     fail "No such diary entry."
   end
+
   def select(wpm, min)
     word_time = wpm * min
     entry = 0
@@ -60,8 +60,8 @@ end
 end
 
 diary = Diary.new
-		entry = Log.new('Dear Diary, called jane on 07859406769','01/01/2021')
-		diary.add(entry)
-		numbers = NumberExtractor.new(diary)
-		results = numbers.extract_numbers
-		puts results
+entry = Log.new('Dear Diary, called jane on 07859406769','01/01/2021')
+diary.add(entry)
+numbers = PhoneBook.new(diary)
+results = numbers.extract_numbers
+expect(result).to eq('07859406769')
