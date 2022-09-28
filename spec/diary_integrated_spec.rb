@@ -3,7 +3,7 @@ require 'log'
 require 'to_do_list'
 require 'number_scraper'
 
-RSpec.describe 'integrated' do
+RSpec.describe Diary do
 	it "add entry" do
 		diary = Diary.new
 		entry = Log.new('Dear Diary, I ate a pineapple.')
@@ -63,7 +63,7 @@ RSpec.describe 'integrated' do
 		diary.add(entry_3)
 		diary.add_list(list)
 		result = diary.past_diary_and_to_do('01/01/2021')
-		expect(result).to eq(['Dear Diary, I ate a pineapple and it was very pleasant to eat.', 'Clean door')
+		expect(result).to eq(['Dear Diary, I ate a pineapple and it was very pleasant to eat.', 'Clean door'])
 	end 
 	it "Ask for day that does not exist" do
 		diary = Diary.new
@@ -80,8 +80,7 @@ RSpec.describe 'integrated' do
 		diary = Diary.new
 		entry = Log.new('Dear Diary, called jane on 07859406769','01/01/2021')
 		diary.add(entry)
-		numbers = NumberExtractor.new(diary)
-		results = numbers.extract_numbers
+		results = diary.extract_numbers
 		expect(result).to eq('07859406769')
 	end 
 end 

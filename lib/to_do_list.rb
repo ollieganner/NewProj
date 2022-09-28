@@ -5,12 +5,13 @@ class TodoList
     @entries = []
   end 
 
+  def entries
+    @entries
+  end
+
   def add(entry) 
     @entries << entry
   end
-  def entries
-    @entries
-end
 
   def complete
     output = []
@@ -25,5 +26,14 @@ end
     @complete.each {|x| output << x.read }
     output
   end
+
+  def get_to_do(day)
+    @entries.each do |x| 
+        if x.date == day    
+             return x.read
+        end 
+    end
+    fail "No such to do."
+  end 
 end
 

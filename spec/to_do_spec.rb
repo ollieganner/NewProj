@@ -10,6 +10,6 @@ RSpec.describe Todo do
 		list_a = Todo.new('Clean dog', '01/01/2021') 
 		list_a.mark_done
 		result = list_a.done
-		expect(result)
+		expect(result).to eq true 
 	end 
 end 

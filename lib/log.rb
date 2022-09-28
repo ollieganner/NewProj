@@ -3,6 +3,7 @@ class Log
     @entry = entry
     @date = date
   end 
+
   def date 
     @date
   end 
